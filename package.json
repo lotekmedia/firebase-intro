@@ -1,0 +1,11 @@
+{
+  "name": "ga-atl-js1",
+  "version": "1.0.0",
+  "description": "Firebase Intro",
+  "main": "home.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Mann",
+  "license": "ISC"
+}

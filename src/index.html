@@ -1,0 +1,52 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>KoЯn Fan Page</title>
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <!-- Firebase CDN -->
+  <script src='https://cdn.firebase.com/js/client/2.4.2/firebase.js'></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <!-- js -->
+  <script src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="menu">
+        <h2><a href="#">Firebased</a></h2>
+      </div>
+      <div class="login">
+        <button id="btnLogin">Login</button>
+        <div id="loggedIn" style="display=none">
+          <div id="loginInfo"></div>
+          <button id="btnLogout">Logout</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="panel">
+      <div class="panel-heading">Post a message for all fans of KoЯn AND KoЯn to see!</div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Message:</label>
+          <textarea id="message" type="text" class="form-control"></textarea>
+        </div>
+        <button id="sendMessage">Post to board</button>
+      </div>
+    </div>
+    <ul id="results">
+    </ul>
+  </main>
+
+</body>
+
+</html>
