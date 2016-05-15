@@ -20,6 +20,9 @@ var jsApp = {
     username: '',
     isLoggedIn: function () {
         jsApp.currentUser = ref.getAuth();
+        if (jsApp.currentUser !== null) {
+            jsApp.username = jsApp.currentUser.google.displayName;
+        }
         return (jsApp.currentUser !== null);
     },
     login: function () {
@@ -88,11 +91,11 @@ var messageClass = (function () {
                 // bind the results to the DOM
                 $messageList = $('<li></li>');
                 $messageList.attr('data-id', item);
-                $user = $('<div>').html(user + ' posted:');
+                $user = $('<div class="user">').html(user);
 
                 // create up vote element
                 var $upVoteElement = $('<i class="fa fa-thumbs-up pull-right"></i>')
-                $upVoteElement.on('click',function (e) {
+                $upVoteElement.on('click', function (e) {
                     var id = $(e.target.parentNode).data('id');
                     votes = Number.parseInt($(e.target.parentNode).find('.curvotes').html());
                     updateMessage(id, ++votes);
@@ -100,13 +103,21 @@ var messageClass = (function () {
 
                 // create down vote element
                 var $downVoteElement = $('<i class="fa fa-thumbs-down pull-right"></i>')
-                $downVoteElement.on('click',function (e) {
+                $downVoteElement.on('click', function (e) {
                     var id = $(e.target.parentNode).data('id');
                     votes = Number.parseInt($(e.target.parentNode).find('.curvotes').html());
                     updateMessage(id, --votes);
                 });
-                
+
+                var $deleteElement = $('<i class="fa fa-trash pull-right delete"></i>')
+                $deleteElement.click(function (e) {
+                    var id = $(e.target.parentNode).data('id')
+                    deleteMessage(id)
+                })
+
                 $messageList.html(msg);
+                $messageList.append($user);
+                $messageList.append($deleteElement);
                 $messageList.append($upVoteElement);
                 $messageList.append($downVoteElement);
                 $messageList.append('<div class="curvotes pull-right">' + votes + '</div>')
@@ -126,7 +137,13 @@ var messageClass = (function () {
         messageReference.update({
             votes: votes
         })
-    }
+    };
+
+    var deleteMessage = function (id) {
+        // find message whose objectId is equal to the id we're searching with
+        var messageReference = new Firebase('https://ltm-js-atl-1.firebaseio.com/messages/' + id)
+        messageReference.remove()
+    };
 
     return {
         postMessage: postMessage,
